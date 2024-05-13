@@ -1,123 +1,61 @@
 <!-- Title -->
-<div id="title">
-	<div>Projects</div>
-	<input bind:value={filter} placeholder="Search Project">
-</div>
+<h1>My Projects</h1>
 
-<!-- Content -->
-<div id="content">
-	<!-- Results -->
-	{#if filter}
-		<!-- Search -->
-		<div class="release" id="active">
-			<div class="header">Search Results</div>
-			{#each Object.entries(projects) as [ , project ]}
-				{#if
-					project.name.toLowerCase().includes(filter.toLowerCase()) ||
-					project.description.toLowerCase().includes(filter.toLowerCase())
-				}
-					<Card project={project} />
-				{/if}
-			{/each}
-		</div>
+<!-- Search Bar -->
+<input placeholder="Search Project">
 
-	<!-- List -->
-	{:else}
-		<!-- Active -->
-		<div class="release" id="active">
-			<div class="header">Active Projects</div>
-			{#each Object.entries(projects) as [ , project ]}
-				{#if project.release === "active"}
-					<Card project={project}/>
-				{/if}
-			{/each}
-		</div>
-
-		<!-- Upcoming -->
-		<div class="release" id="upcoming">
-			<div class="header">Upcoming Projects</div>
-			{#each Object.entries(projects) as [ , project ]}
-				{#if project.release === "upcoming"}
-					<Card project={project} />
-				{/if}
-			{/each}
-		</div>
-
-		<!-- Archived -->
-		<div class="release" id="archived">
-			<div class="header">Archived Projects</div>
-			{#each Object.entries(projects) as [ , project ]}
-				{#if project.release === "archived"}
-					<Card project={project} />
-				{/if}
-			{/each}
-		</div>
-	{/if}
+<!-- Project Cards -->
+<div>
+	{#each [] as project, index}
+		{project}
+	{/each}
 </div>
 
 <!-- Script -->
 <script lang="ts">
-	// Imports
-	import Card from "./card.svelte";
-	import projects from "$lib/projects";
+	// import { projects } from "$lib/projects/projects";
+	import type { Project } from "$lib/types";
 
-	// Defines filter
-	let filter: string;
+	// Imports
+	
+	
 </script>
 
 <!-- Style -->
 <style lang="scss">
 	// Title
-	#title {
-		align-items: center;
-		display: flex;
-		gap: 0 25px;
+	h1 {
+		font-size: 25px;
+		font-weight: bold;
+		line-height: 30px;
+		text-align: center;
+	}
 
-		div {
-			font-size: 20px;
-			font-weight: bold;
-			line-height: 25px;
+	// Search Bar
+	input {
+		background-color: rgb(var(--soda-less-black));
+		border-radius: 5px;
+		margin: 30px 0px;
+		opacity: 50%;
+		padding: 10px 20px;
+		position: relative;
+		transition: all 0.2s ease;
+		width: calc(100% - 40px);
+
+		&:hover {
+			opacity: 75%;
 		}
 
-		input {
-			background-color: rgb(var(--soda-less-black));
-			border-radius: 5px;
-			flex: 1;
-			padding: 5px 15px;
+		&:focus {
+			opacity: 100%;
 		}
 	}
 
-	// Content
-	#content {
+	// Project Cards
+	div {
 		display: flex;
-		flex-direction: column;
-		gap: 50px 0px;
-		padding: 30px 0;
-
-		.release {
-			display: flex;
-			flex-direction: column;
-			gap: 25px 0px;
-
-			.header {
-				align-items: center;
-				display: flex;
-				font-weight: bold;
-				gap: 0px 25px;
-				
-				&::before, &::after {
-					background-color: rgb(var(--soda-white));
-					content: "";
-					flex: 1;
-					height: 2px;
-				}
-			}
-
-			Card {
-				&:after {
-					content: "hai";
-				}
-			}
-		}
+		flex-wrap: wrap;
+		gap: 15px 15px;
+		justify-content: center;
 	}
 </style>

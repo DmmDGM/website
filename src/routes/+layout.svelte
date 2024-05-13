@@ -20,7 +20,7 @@
 <script lang="ts">
 	// Imports
 	import { page } from "$app/stores";
-	import "$lib/soda/v1u0.css";
+	import "$lib/projects/soda/beta.css";
 
 	// Defines path
 	$: path = $page.url.pathname.split("/")[1];
@@ -53,7 +53,6 @@
 		a {
 			font-weight: bold;
 			position: relative;
-
 			&::after {
 				background-color:rgb(var(--soda-white));
 				bottom: -5px;
@@ -83,8 +82,8 @@
 	// Main
 	main {
 		height: calc(100vh - 50px - 60px);
-		padding: 25px 10vw;
-		width: 80vw;
+		padding: 25px 10%;
+		width: 80%;
 
 		@media screen and (max-width: 500px) {
 			height: calc(100vh - 50px - 165px);

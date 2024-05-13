@@ -1,36 +1,20 @@
-<!-- Card -->
-<a href="/projects/{project.id}" style="background-color: {project.card.color};" id="card">
-	<div id="name">{project.name}</div>
-	<div id="description">{project.description}</div>
-</a>
+<div>
 
-<!-- Script -->
+</div>
+
 <script lang="ts">
-	import type { Project } from "$lib/projects";
-
 	// Imports
-	export let project: Project;
+	export let title;
+	export let description;
+	export let version;
+	export let theme;
+
+	console.log(title);
 </script>
 
-<!-- Style -->
 <style lang="scss">
-	#card {
-		padding: 10px 20px;
-		display: flex;
-		flex-direction: column;
-		gap: 5px 0px;
-		opacity: 0.75;
-		border-radius: 5px;
-		transition: all 0.1s ease;
-
-		&:hover {
-			opacity: 1;
-		}
-
-		#name {
-			// font-size: 20px;
-			// line-height: 25px;
-			font-weight: bold;
-		}
+	div {
+		min-width: 400px;
+		height: 200px;
 	}
 </style>
