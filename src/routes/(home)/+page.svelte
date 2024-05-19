@@ -19,7 +19,7 @@
 		justify-content: center;
 		flex-direction: column;
 		gap: 10px 0;
-		height: 100%;
+		flex: 1;
 		width: 100%;
 	}
 

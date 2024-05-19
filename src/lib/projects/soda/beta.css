@@ -13,6 +13,10 @@
 	--soda-true-black: 0, 0, 0;
 }
 
+:root {
+	--damn: "hi";
+}
+
 /* Resets */
 * {
 	background: none; 

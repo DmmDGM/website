@@ -81,12 +81,14 @@
 
 	// Main
 	main {
-		height: calc(100vh - 50px - 60px);
+		display: flex;
+		flex-direction: column;
+		min-height: calc(100vh - 50px - 60px);
 		padding: 25px 10%;
 		width: 80%;
 
 		@media screen and (max-width: 500px) {
-			height: calc(100vh - 50px - 165px);
+			min-height: calc(100vh - 50px - 165px);
 		}
 	}
 </style>
