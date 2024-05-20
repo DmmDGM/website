@@ -39,3 +39,24 @@ body {
 	height: 100vh;
 	width: 100%;
 }
+
+/* Styles */
+.soda-hover-line {
+	position: relative;
+}
+
+.soda-hover-line::after {
+	background-color:rgb(var(--soda-white));
+	bottom: -5px;
+	content: "";
+	height: 3px;
+	left: 0%;
+	position: absolute;
+	transform: scaleX(0);
+	transition: transform 0.2s ease;
+	width: 100%;
+}
+
+.soda-hover-line:hover::after {
+	transform: scaleX(0.25);
+}

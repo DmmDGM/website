@@ -5,10 +5,10 @@
 
 <!-- Navigation -->
 <nav>
-	<a href="/" class:nav-active={path === ""}>Home</a>
-	<a href="/about" class:nav-active={path === "about"}>About</a>
-	<a href="/projects" class:nav-active={path === "projects"}>Projects</a>
-	<a href="/puzzles" class:nav-active={path === "puzzles"}>Puzzles</a>
+	<a href="/" class:nav-active={path === ""} class="soda-hover-line">Home</a>
+	<a href="/about" class:nav-active={path === "about"} class="soda-hover-line">About</a>
+	<a href="/projects" class:nav-active={path === "projects"} class="soda-hover-line">Projects</a>
+	<a href="/puzzles" class:nav-active={path === "puzzles"} class="soda-hover-line">Puzzles</a>
 </nav>
 
 <!-- Main -->
@@ -53,21 +53,6 @@
 		a {
 			font-weight: bold;
 			position: relative;
-			&::after {
-				background-color:rgb(var(--soda-white));
-				bottom: -5px;
-				content: "";
-				height: 3px;
-				left: 0%;
-				position: absolute;
-				transform: scale(0, 1);
-				transition: all 0.1s ease-in-out;
-				width: 100%;
-			}
-
-			&:hover::after {
-				transform: scale(0.25, 1);
-			}
 
 			&.nav-active::after {
 				transform: scale(1, 1);

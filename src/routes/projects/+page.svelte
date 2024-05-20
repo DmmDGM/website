@@ -4,7 +4,7 @@
 	<h1 id="title">My Projects</h1>
 
 	<!-- Search bar -->
-	<input bind:value={query} on:input={() => {
+	<input bind:value={query} bind:this={searchInput} on:input={() => {
 		// Records time
 		const start = Date.now();
 
@@ -18,9 +18,9 @@
 			if(clean.length === 0) return true;
 			
 			// Extracts data
-			const tags = Array.from(clean.matchAll(/#([-a-zA-Z0-9]*)/g)).map((match) => match[1]);
-			const text = clean.replace(/\s*[#@][-a-zA-Z0-9]*\s*/g, " ").trim();
-			const versions = Array.from(clean.matchAll(/@([-a-zA-Z0-9]*)/g)).map((match) => match[1]);
+			const tags = Array.from(clean.matchAll(/(?:^|\s+)#([-a-zA-Z0-9]*)(?:$|\s+)/g)).map((match) => match[1]);
+			const text = clean.replace(/(?<=^|\s+)[#@]([-a-zA-Z0-9]*)(?=$|\s+)/g, " ").trim().replace(/\s+/g, " ");
+			const versions = Array.from(clean.matchAll(/(?:^|\s+)@([-a-zA-Z0-9]*)(?:$|\s+)/g)).map((match) => match[1]);
 
 			// Filters by tags
 			if(
@@ -53,18 +53,24 @@
 	<!-- Projects -->
 	<div id="projects">
 		{#if results.length === 0}
-			<div id="project-none">I found nothing, sorry... Q . Q</div>
+			<div id="project-none">No projects found, sorry... Q ~ Q</div>
 		{:else}
 			{#each results as project, index (index)}
 				<div class="project">
 					<div class="project-header">
-						<a href="projects/{project["id"]}" class="project-name">{project["name"]}</a>
-						<div class="project-version">{project["version"]}</div>
+						<a href="projects/{project["id"]}" class="project-name soda-hover-line">{project["name"]}</a>
+						<button on:click={() => {
+							query = `@${project["version"].toLowerCase()} ${query}`;
+							searchInput.focus();
+						}} class="project-version">{project["version"]}</button>
 					</div>
 					<div class="project-description">{project["description"]}</div>
 					<div class="project-tags">
 						{#each project["tags"] as tag}
-							<div class="project-tag">{tag}</div>
+							<button on:click={() => {
+								query = `#${tag.toLowerCase()} ${query}`;
+								searchInput.focus();
+							}} class="project-tag">#{tag}</button>
 						{/each}
 					</div>
 				</div>
@@ -81,6 +87,9 @@
 
 <!-- Script -->
 <script lang="ts">
+	// Defines search bar
+	let searchInput: HTMLInputElement;
+
 	// Defines project type
 	type Project = {
 		description: string;
@@ -169,27 +178,16 @@
 						font-size: 20px;
 						font-weight: bold;
 						line-height: 25px;
-						position: relative;
-
-						&::after {
-							background-color:rgb(var(--soda-white));
-							bottom: -5px;
-							content: "";
-							height: 3px;
-							left: 0%;
-							position: absolute;
-							transform: scale(0, 1);
-							transition: all 0.1s ease-in-out;
-							width: 100%;
-						}
-
-						&:hover::after {
-							transform: scale(0.25, 1);
-						}
 					}
 
 					.project-version {
 						color: rgb(var(--soda-less-white));
+						cursor: pointer;
+						transition: all 0.2s ease;
+
+						&:hover {
+							color: rgb(var(--soda-white));
+						}
 					}
 				}
 
@@ -201,7 +199,14 @@
 					.project-tag {
 						background-color: rgb(var(--soda-less-black));
 						border-radius: 5px;
+						cursor: pointer;
+						opacity: 75%;
 						padding: 3px 5px;
+						transition: all 0.2s ease;
+
+						&:hover {
+							opacity: 100%;
+						}
 					}
 				}
 			}
