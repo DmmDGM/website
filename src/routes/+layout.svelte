@@ -3,24 +3,28 @@
 	<title>DmmD GM / {title}</title>
 </svelte:head>
 
-<!-- Navigation -->
-<nav>
-	<a href="/" class:nav-active={path === ""} class="soda-hover-line">Home</a>
-	<a href="/about" class:nav-active={path === "about"} class="soda-hover-line">About</a>
-	<a href="/projects" class:nav-active={path === "projects"} class="soda-hover-line">Projects</a>
-	<a href="/puzzles" class:nav-active={path === "puzzles"} class="soda-hover-line">Puzzles</a>
-</nav>
-
-<!-- Main -->
-<main>
-	<slot />
-</main>
+<!-- Container -->
+<div id="container">
+	<!-- Navigation -->
+	<nav>
+		<a href="/" class:nav-active={path === ""} class="soda-hover-underline">Home</a>
+		<a href="/about" class:nav-active={path === "about"} class="soda-hover-underline">About</a>
+		<a href="/projects" class:nav-active={path === "projects"} class="soda-hover-underline">Projects</a>
+		<a href="/puzzles" class:nav-active={path === "puzzles"} class="soda-hover-underline">Puzzles</a>
+		<a href="/others" class:nav-active={path === "others"} class="soda-hover-underline">Others</a>
+	</nav>
+	
+	<!-- Main -->
+	<main>
+		<slot />
+	</main>
+</div>
 
 <!-- Script -->
 <script lang="ts">
 	// Imports
 	import { page } from "$app/stores";
-	import "$lib/projects/soda/beta.css";
+	import "$lib/projects/soda/src/main.scss";
 
 	// Defines path
 	$: path = $page.url.pathname.split("/")[1];
@@ -33,47 +37,46 @@
 <style lang="scss">
 	// Global
 	:global(*) {
-		color: rgb(var(--soda-white));
-		scrollbar-color: rgb(var(--soda-white)) rgb(var(--soda-black));
+		color: rgb(var(--soda-color-white));
+		scrollbar-color: rgb(var(--soda-color-white)) rgb(var(--soda-color-black));
 	}
 
 	:global(body) {
-		background-color: rgb(var(--soda-black));
+		// background-color: rgb(var(--soda-color-black));
 	}
 
-	// Navigation
-	nav {
-		align-items: center;
+	// Container
+	#container {
 		display: flex;
-		justify-content: center;
-		gap: 15px 10vw;
-		padding: 20px 0px;
-		user-select: none;
+		flex-direction: column;
+		height: 100%;
 
-		a {
-			font-weight: bold;
-			position: relative;
+		// Navigation
+		nav {
+			align-items: center;
+			display: flex;
+			justify-content: center;
+			gap: 15px 10vw;
+			padding: 20px 0px;
+			user-select: none;
 
-			&.nav-active::after {
-				transform: scale(1, 1);
+			a {
+				font-weight: bold;
+
+				&.nav-active::after {
+					transform: scaleX(1);
+				}
+			}
+
+			@media screen and (max-width: 650px) {
+				flex-direction: column;
 			}
 		}
 
-		@media screen and (max-width: 500px) {
-			flex-direction: column;
-		}
-	}
-
-	// Main
-	main {
-		display: flex;
-		flex-direction: column;
-		min-height: calc(100vh - 50px - 60px);
-		padding: 25px 10%;
-		width: 80%;
-
-		@media screen and (max-width: 500px) {
-			min-height: calc(100vh - 50px - 165px);
+		// Main
+		main {
+			flex: 1;
+			padding: 25px 10%;
 		}
 	}
 </style>

@@ -1,0 +1,93 @@
+:root {
+  --soda-color-purple: 143, 79, 143;
+  --soda-color-true-white: 255, 255, 255;
+  --soda-color-white: 239, 239, 239;
+  --soda-color-less-white: 207, 207, 207;
+  --soda-color-less-black: 31, 31, 31;
+  --soda-color-black: 15, 15, 15;
+  --soda-color-true-black: 0, 0, 0;
+}
+
+.soda-font-giant {
+  font-size: 50px;
+  line-height: 55px;
+  font-weight: bold;
+}
+
+.soda-font-large {
+  font-size: 35px;
+  line-height: 40px;
+  font-weight: bold;
+}
+
+.soda-font-big {
+  font-size: 25px;
+  line-height: 30px;
+  font-weight: bold;
+}
+
+.soda-font-medium {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.soda-font-small {
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.soda-font-tiny {
+  font-size: 5px;
+  line-height: 10px;
+}
+
+.soda-hover-overline, .soda-hover-underline {
+  position: relative;
+}
+.soda-hover-overline::before {
+  top: -5px;
+}
+.soda-hover-underline::after {
+  bottom: -5px;
+}
+.soda-hover-overline::before, .soda-hover-underline::after {
+  background-color: rgb(var(--soda-color-white));
+  content: "";
+  height: 3px;
+  left: 0%;
+  position: absolute;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+  width: 100%;
+}
+.soda-hover-overline::before:hover, .soda-hover-underline::after:hover {
+  transform: scaleX(0.25);
+}
+
+* {
+  background: none;
+  border: none;
+  color: rgb(var(--soda-color-black));
+  font: normal normal normal 15px/20px sans-serif;
+  list-style: none;
+  margin: 0px;
+  outline: none;
+  padding: 0px;
+  scrollbar-color: rgb(var(--soda-color-black)) rgb(var(--soda-color-white));
+  scrollbar-gutter: stable both-edges;
+  scrollbar-width: thin;
+  text-decoration: none;
+}
+
+html {
+  height: 100vh;
+  width: 100%;
+}
+
+body {
+  background-color: rgb(var(--soda-color-white));
+  height: 100%;
+  width: 100%;
+}
+
+/*# sourceMappingURL=main.css.map */

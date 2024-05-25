@@ -1,4 +1,28 @@
-<!--  -->
+<!-- Container -->
+<div id="container">
+	<!-- Title -->
+	<h1>Soda.css</h1>
+
+	<!-- Description -->
+	<div id="description">
+		
+	</div>
+
+	<!-- Download -->
+	<div id="download">
+
+	</div>
+
+	<!-- Demonstration -->
+	<div id="demostration">
+
+	</div>
+
+	<!-- Documentation -->
+	<div id="documentation">
+
+	</div>
+</div>
 
 <!-- Script -->
 <script lang="ts">

@@ -1,26 +1,91 @@
 <!-- Container -->
 <div id="container">
 	<!-- Title -->
-	<h1 id="title">My Projects</h1>
+	<h1 class="soda-font-big" id="title">My Projects</h1>
 
 	<!-- Search bar -->
-	<input bind:value={query} bind:this={searchInput} on:input={() => {
+	<input bind:value={searchValue} bind:this={searchInput} on:input={() => {
+		searchUpdate();
+	}} placeholder="Search Project | @version or #tag" id="search">
+
+	<!-- Projects -->
+	<div id="projects">
+		{#if searchResult.length === 0}
+			<div id="project-none">No projects found, sorry... Q ~ Q</div>
+		{:else}
+			{#each searchResult as project, index (index)}
+				<div class="project">
+					<div class="project-header">
+						<a href="projects/{project["id"]}" class="project-name soda-hover-line">{project["name"]}</a>
+						<button on:click={() => {
+							searchAppend("@" + project["version"].toLowerCase());
+						}} class="project-version">{project["version"]}</button>
+					</div>
+					<div class="project-description">{project["description"]}</div>
+					<div class="project-tags">
+						{#each project["tags"] as tag}
+							<button on:click={() => {
+								searchAppend("#" + tag.toLowerCase());
+							}} class="project-tag">#{tag}</button>
+						{/each}
+					</div>
+				</div>
+			{/each}
+		{/if}
+	</div>
+
+	<!-- Footer -->
+	<footer>
+		<div id="counter">{searchResult.length === 3 ? ":3" : searchResult.length} {searchResult.length === 1 ? "result" : "results"} found</div>
+		<div id="timelapse">Search took {searchTime} ms</div>
+	</footer>
+</div>
+
+<!-- Script -->
+<script lang="ts">
+	// Defines project type
+	type Project = {
+		description: string;
+		id: string;
+		name: string;
+		tags: string[];
+		version: string;
+	};
+
+	// Defines projects
+	const projects: Project[] = [
+		{
+			description: "Soda.css - The minimalistic & flexible solution to CSS templates.",
+			id: "soda",
+			name: "Soda.css",
+			tags: [ "web", "css" ],
+			version: "Beta"
+		}
+	];
+
+	// Sets up search bar
+	let searchInput: HTMLInputElement;
+	let searchValue: string = "";
+	let searchResult: Project[] = projects;
+	let searchTime = 0;
+	let searchUpdate = () => {
 		// Records time
 		const start = Date.now();
 
 		// Updates search on input
-		results = projects.filter((project) => {
+		searchResult = projects.filter((project) => {
 
 			// Cleans data
-			const clean = query.trim().toLowerCase();
+			const clean = searchValue.trim().toLowerCase();
 
 			// Shows all results with empty query
 			if(clean.length === 0) return true;
 			
 			// Extracts data
-			const tags = Array.from(clean.matchAll(/(?:^|\s+)#([-a-zA-Z0-9]*)(?:$|\s+)/g)).map((match) => match[1]);
-			const text = clean.replace(/(?<=^|\s+)[#@]([-a-zA-Z0-9]*)(?=$|\s+)/g, " ").trim().replace(/\s+/g, " ");
-			const versions = Array.from(clean.matchAll(/(?:^|\s+)@([-a-zA-Z0-9]*)(?:$|\s+)/g)).map((match) => match[1]);
+			const tags = Array.from(clean.matchAll(/(?<=^#|\s#)[-a-zA-Z0-9]*(?=$|\s)/g)).map((match) => match[0]);
+			const text = clean.replace(/(?<=^|\s)[#@][-a-zA-Z0-9]*(?=$|\s)/g, " ").trim().replace(/\s+/g, " ");
+			const versions = Array.from(clean.matchAll(/(?<=^@|\s@)[-a-zA-Z0-9]*(?=$|\s)/g)).map((match) => match[0]);
+			console.table({ tags, text, versions });
 
 			// Filters by tags
 			if(
@@ -47,73 +112,17 @@
 
 		// Updates time
 		const end = Date.now();
-		timelapse = end - start;
-	}} placeholder="Search Project | @version or #tag" id="search">
-
-	<!-- Projects -->
-	<div id="projects">
-		{#if results.length === 0}
-			<div id="project-none">No projects found, sorry... Q ~ Q</div>
-		{:else}
-			{#each results as project, index (index)}
-				<div class="project">
-					<div class="project-header">
-						<a href="projects/{project["id"]}" class="project-name soda-hover-line">{project["name"]}</a>
-						<button on:click={() => {
-							query = `@${project["version"].toLowerCase()} ${query}`;
-							searchInput.focus();
-						}} class="project-version">{project["version"]}</button>
-					</div>
-					<div class="project-description">{project["description"]}</div>
-					<div class="project-tags">
-						{#each project["tags"] as tag}
-							<button on:click={() => {
-								query = `#${tag.toLowerCase()} ${query}`;
-								searchInput.focus();
-							}} class="project-tag">#{tag}</button>
-						{/each}
-					</div>
-				</div>
-			{/each}
-		{/if}
-	</div>
-
-	<!-- Footer -->
-	<footer>
-		<div id="counter">{results.length === 3 ? ":3" : results.length} {results.length === 1 ? "result" : "results"} found</div>
-		<div id="timelapse">Search took {timelapse} ms</div>
-	</footer>
-</div>
-
-<!-- Script -->
-<script lang="ts">
-	// Defines search bar
-	let searchInput: HTMLInputElement;
-
-	// Defines project type
-	type Project = {
-		description: string;
-		id: string;
-		name: string;
-		tags: string[];
-		version: string;
+		searchTime = end - start;
 	};
+	let searchAppend = (text: string) => {
+		// Appends query
+		const appendSpace = searchValue.length === 0 || searchValue[searchValue.length - 1] === " ";
+		searchValue += (appendSpace ? "" : " ") + text + " ";
+		searchUpdate();
 
-	// Defines projects
-	const projects: Project[] = [
-		{
-			description: "Soda.css - The minimalistic & flexible solution to CSS templates.",
-			id: "soda",
-			name: "Soda.css",
-			tags: [ "web", "css" ],
-			version: "Beta"
-		}
-	];
-
-	// Sets up search bar
-	let query: string = "";
-	let results: Project[] = projects;
-	let timelapse = 0;
+		// Focuses search bar
+		searchInput.focus();
+	};
 	
 </script>
 
@@ -122,21 +131,17 @@
 	// Container
 	#container {
 		display: flex;
-		flex: 1;
 		flex-direction: column;
 		gap: 30px 0px;
 
 		// Title
 		#title {
-			font-size: 25px;
-			font-weight: bold;
-			line-height: 30px;
 			text-align: center;
 		}
 
 		// Search bar
 		#search {
-			background-color: rgb(var(--soda-less-black));
+			background-color: rgb(var(--soda-color-less-black));
 			border-radius: 5px;
 			opacity: 50%;
 			padding: 10px 20px;
@@ -159,14 +164,14 @@
 			flex-direction: column;
 
 			.project {
-				border-bottom: solid 1px rgb(var(--soda-white));
+				border-bottom: solid 1px rgb(var(--soda-color-white));
 				display: flex;
 				flex-direction: column;
 				gap: 10px 0px;
 				padding: 20px 25px;
 
 				&:first-child {
-					border-top: solid 1px rgb(var(--soda-white));
+					border-top: solid 1px rgb(var(--soda-color-white));
 				}
 
 				.project-header {
@@ -181,12 +186,12 @@
 					}
 
 					.project-version {
-						color: rgb(var(--soda-less-white));
+						color: rgb(var(--soda-color-less-white));
 						cursor: pointer;
 						transition: all 0.2s ease;
 
 						&:hover {
-							color: rgb(var(--soda-white));
+							color: rgb(var(--soda-color-white));
 						}
 					}
 				}
@@ -197,7 +202,7 @@
 					gap: 10px 10px;
 
 					.project-tag {
-						background-color: rgb(var(--soda-less-black));
+						background-color: rgb(var(--soda-color-less-black));
 						border-radius: 5px;
 						cursor: pointer;
 						opacity: 75%;

@@ -1,8 +1,8 @@
 <!-- Splash message -->
 <div id="splash">
-	<h1>Welcome!</h1>
+	<h1 class="soda-font-giant">Welcome!</h1>
 	<p>More to come on this home page.</p>
-	<p class="smol">(Or maybe not...)</p>
+	<p class="soda-font-small">(Or maybe not...)</p>
 </div>
 
 <!-- Script -->
@@ -19,21 +19,6 @@
 		justify-content: center;
 		flex-direction: column;
 		gap: 10px 0;
-		flex: 1;
-		width: 100%;
-	}
-
-	// Splash message
-	h1 {
-		font-size: 50px;
-		font-weight: bold;
-		line-height: 55px;
-	}
-
-	p {		
-		&.smol {
-			font-size: 10px;
-			line-height: 15px;
-		}
+		height: 100%;
 	}
 </style>
