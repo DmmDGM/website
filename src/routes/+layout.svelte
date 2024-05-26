@@ -7,11 +7,11 @@
 <div id="container">
 	<!-- Navigation -->
 	<nav>
-		<a href="/" class:nav-active={path === ""} class="soda-hover-underline">Home</a>
-		<a href="/about" class:nav-active={path === "about"} class="soda-hover-underline">About</a>
-		<a href="/projects" class:nav-active={path === "projects"} class="soda-hover-underline">Projects</a>
-		<a href="/puzzles" class:nav-active={path === "puzzles"} class="soda-hover-underline">Puzzles</a>
-		<a href="/others" class:nav-active={path === "others"} class="soda-hover-underline">Others</a>
+		<a href="/" class:nav-active={path === ""}>Home</a>
+		<a href="/about" class:nav-active={path === "about"}>About</a>
+		<a href="/projects" class:nav-active={path === "projects"}>Projects</a>
+		<a href="/puzzles" class:nav-active={path === "puzzles"}>Puzzles</a>
+		<a href="/others" class:nav-active={path === "others"}>Others</a>
 	</nav>
 	
 	<!-- Main -->
@@ -24,7 +24,6 @@
 <script lang="ts">
 	// Imports
 	import { page } from "$app/stores";
-	import "$lib/projects/soda/src/main.scss";
 
 	// Defines path
 	$: path = $page.url.pathname.split("/")[1];
@@ -35,32 +34,38 @@
 
 <!-- Style -->
 <style lang="scss">
+	// Imports
+	:global {
+		@import "src/lib/soda.scss";
+	}
+
 	// Global
 	:global(*) {
-		color: rgb(var(--soda-color-white));
-		scrollbar-color: rgb(var(--soda-color-white)) rgb(var(--soda-color-black));
+		color: rgb(var(--soda-color-white)) !important;
+		scrollbar-color: rgb(var(--soda-color-white)) rgb(var(--soda-color-black)) !important;
 	}
 
 	:global(body) {
-		// background-color: rgb(var(--soda-color-black));
+		background-color: rgb(var(--soda-color-black)) !important;
 	}
 
 	// Container
 	#container {
-		display: flex;
-		flex-direction: column;
+		@extend .soda-flex-column;
+
 		height: 100%;
 
 		// Navigation
 		nav {
-			align-items: center;
-			display: flex;
-			justify-content: center;
+			@extend .soda-flex-center;
+
 			gap: 15px 10vw;
 			padding: 20px 0px;
 			user-select: none;
 
 			a {
+				@extend .soda-hover-underline;
+
 				font-weight: bold;
 
 				&.nav-active::after {

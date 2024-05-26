@@ -1,7 +1,7 @@
 <!-- Container -->
 <div id="container">
 	<!-- Title -->
-	<h1 class="soda-font-big" id="title">My Projects</h1>
+	<h1 id="title">My Projects</h1>
 
 	<!-- Search bar -->
 	<input bind:value={searchValue} bind:this={searchInput} on:input={() => {
@@ -16,7 +16,7 @@
 			{#each searchResult as project, index (index)}
 				<div class="project">
 					<div class="project-header">
-						<a href="projects/{project["id"]}" class="project-name soda-hover-line">{project["name"]}</a>
+						<a href="projects/{project["id"]}" class="project-name">{project["name"]}</a>
 						<button on:click={() => {
 							searchAppend("@" + project["version"].toLowerCase());
 						}} class="project-version">{project["version"]}</button>
@@ -128,14 +128,21 @@
 
 <!-- Style -->
 <style lang="scss">
+	// Imports
+	:global {
+		@import "src/lib/soda.scss";
+	}
+
 	// Container
 	#container {
-		display: flex;
-		flex-direction: column;
+		@extend .soda-flex-column;
+
 		gap: 30px 0px;
 
 		// Title
 		#title {
+			@extend .soda-font-25;
+
 			text-align: center;
 		}
 
@@ -160,13 +167,12 @@
 
 		// Projects
 		#projects {
-			display: flex;
-			flex-direction: column;
+			@extend .soda-flex-column;
 
 			.project {
+				@extend .soda-flex-column;
+
 				border-bottom: solid 1px rgb(var(--soda-color-white));
-				display: flex;
-				flex-direction: column;
 				gap: 10px 0px;
 				padding: 20px 25px;
 
@@ -175,30 +181,29 @@
 				}
 
 				.project-header {
-					align-items: center;
-					display: flex;
+					@extend .soda-flex-center-align;
+
 					gap: 0px 15px;
 
 					.project-name {
-						font-size: 20px;
-						font-weight: bold;
-						line-height: 25px;
+						@extend .soda-hover-underline;
+						@extend .soda-font-20;
 					}
 
 					.project-version {
-						color: rgb(var(--soda-color-less-white));
 						cursor: pointer;
+						opacity: 75%;
 						transition: all 0.2s ease;
 
 						&:hover {
-							color: rgb(var(--soda-color-white));
+							opacity: 100%;
 						}
 					}
 				}
 
 				.project-tags {
-					display: flex;
-					flex-wrap: wrap;
+					@extend .soda-flex-list;
+
 					gap: 10px 10px;
 
 					.project-tag {

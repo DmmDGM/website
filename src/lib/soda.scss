@@ -8,37 +8,83 @@
   --soda-color-true-black: 0, 0, 0;
 }
 
-.soda-font-giant {
-  font-size: 50px;
-  line-height: 55px;
+.soda-flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+.soda-flex-center-align {
+  align-items: center;
+  display: flex;
+}
+.soda-flex-center-justify {
+  justify-content: center;
+}
+.soda-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+.soda-flex-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.soda-font-5 {
+  font-size: 5px;
+  line-height: 10px;
+}
+
+.soda-font-10 {
+  font-size: 10px;
+  line-height: 15px;
+}
+
+.soda-font-15 {
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.soda-font-20 {
+  font-size: 20px;
+  line-height: 25px;
   font-weight: bold;
 }
 
-.soda-font-large {
-  font-size: 35px;
-  line-height: 40px;
-  font-weight: bold;
-}
-
-.soda-font-big {
+.soda-font-25 {
   font-size: 25px;
   line-height: 30px;
   font-weight: bold;
 }
 
-.soda-font-medium {
-  font-size: 15px;
-  line-height: 20px;
+.soda-font-30 {
+  font-size: 30px;
+  line-height: 35px;
+  font-weight: bold;
 }
 
-.soda-font-small {
-  font-size: 10px;
-  line-height: 15px;
+.soda-font-35 {
+  font-size: 35px;
+  line-height: 40px;
+  font-weight: bold;
 }
 
-.soda-font-tiny {
-  font-size: 5px;
-  line-height: 10px;
+.soda-font-40 {
+  font-size: 40px;
+  line-height: 45px;
+  font-weight: bold;
+}
+
+.soda-font-45 {
+  font-size: 45px;
+  line-height: 50px;
+  font-weight: bold;
+}
+
+.soda-font-50 {
+  font-size: 50px;
+  line-height: 55px;
+  font-weight: bold;
 }
 
 .soda-hover-overline, .soda-hover-underline {
@@ -60,7 +106,7 @@
   transition: transform 0.2s ease;
   width: 100%;
 }
-.soda-hover-overline::before:hover, .soda-hover-underline::after:hover {
+.soda-hover-overline:hover::before, .soda-hover-underline:hover::after {
   transform: scaleX(0.25);
 }
 
@@ -90,4 +136,4 @@ body {
   width: 100%;
 }
 
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=soda.scss.map */

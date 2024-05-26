@@ -8,8 +8,8 @@
 		
 	</div>
 
-	<!-- Download -->
-	<div id="download">
+	<!-- Release -->
+	<div id="release">
 
 	</div>
 
