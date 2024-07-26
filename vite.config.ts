@@ -1,6 +1,8 @@
-import { sveltekit } from '@sveltejs/kit/vite';
-import { defineConfig } from 'vite';
+// Imports
+import { sveltekit } from "@sveltejs/kit/vite";
+import { defineConfig } from "vite";
 
+// Exports
 export default defineConfig({
 	plugins: [sveltekit()],
 	server: {
