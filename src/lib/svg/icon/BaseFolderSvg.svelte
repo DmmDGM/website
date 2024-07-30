@@ -6,7 +6,7 @@
 <!-- Script -->
 <script lang="ts">
 	// Imports
-    import type { BaseFile, BaseFolder } from "$lib/ts/files";
+    import type { BaseFile, BaseFolder } from "$lib/ts/api/files";
 	export let file: BaseFile | BaseFolder; 
 	export let height: number = 16;
 	export let width: number = 16;

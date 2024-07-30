@@ -1,34 +1,61 @@
-<!-- Head -->
-
 <!-- Template -->
 <main>
-	<div id="title">DmmD GM</div>
-	<div id="navigation">
-		<button id="back">
-			<LeftArrowSvg />
-		</button>
-		<button id="forward">
-			<RightArrowSvg />
-		</button>
-		<button id="parent">
-			<UpArrowSvg />
-		</button>
-		<input id="search" placeholder="Search">
-	</div>
-	<div id="display">
-		<ExplorerDisplay folder={root} />
-	</div>
+	<!-- Title -->
+	<Title title="DmmD GM" />
+
+	<!-- Navigation -->
+	<Navigation
+		bind:content={content}
+		bind:query={query}
+		bind:timeline={timeline}
+		backward={() => {
+			// Goes backward in history
+			timeline.backward();
+			content = timeline.current();
+			query = content.path();
+		}}
+		forward={() => {
+			// Goes forward in history
+			timeline.forward();
+			content = timeline.current();
+			query = content.path();
+		}}
+		upward={() => {
+			// Jumps to parent
+			if(content.parent !== null) {
+				timeline.write(content.parent);
+				content = timeline.current();
+				query = content.path();
+			}
+		}}
+		search={() => {
+			console.log("searched " + query);
+		}}
+	/>
+
+	<!-- Display -->
+	<Display
+		bind:content={content}
+		bind:query={query}
+		bind:timeline={timeline}
+	/>
 </main>
 
 <!-- Script -->
 <script lang="ts">
 	// Imports
 	import "$lib/css/soda.css";
-	import ExplorerDisplay from "$lib/svelte/FolderDisplay.svelte";
-	import LeftArrowSvg from "$lib/svg/leftArrowSvg.svelte";
-	import RightArrowSvg from "$lib/svg/rightArrowSvg.svelte";
-	import UpArrowSvg from "$lib/svg/upArrowSvg.svelte";
-	import root from "$lib/ts/root";
+	import Title from "$lib/svelte/Title.svelte";
+	import Navigation from "$lib/svelte/Navigation.svelte";
+    import Display from "$lib/svelte/Display.svelte";
+    import { BaseFile, BaseFolder } from "$lib/ts/files";
+	import { root } from "$lib/ts/root";
+    import { Timeline } from "$lib/ts/timeline";
+	
+	// Initializes data
+	let content: BaseFile | BaseFolder = root;
+	let timeline: Timeline = new Timeline(root);
+	let query: string = root.path();
 </script>
 
 <!-- Style -->
@@ -45,78 +72,18 @@
 		justify-content: center;
 	}
 
+	:global(button) {
+		cursor: pointer;
+	}
+
 	// Main
 	main {
 		align-items: center;
 		display: flex;
 		flex-direction: column;
-		gap: 25px 0px;
-		height: 80%;
+		gap: 10px 0px;
+		height: 85%;
 		justify-content: center;
-		width: 80%;
-	}
-
-	// Title
-	#title {
-		cursor: default;
-		font-weight: bold;
-		font-size: 20px;
-		line-height: 25px;
-		position: relative;
-
-		&::after {
-			background-color: var(--sd-white);
-			content: "";
-			height: 2px;
-			left: 0%;
-			position: absolute;
-			top: 100%;
-			transform: scaleX(0%);
-			transition: transform 0.2s ease;
-			width: 100%;
-		}
-
-		&:hover::after {
-			transform: scaleX(100%);
-		}
-	}
-
-	// Navigation
-	#navigation {
-		display: flex;
-		width: 100%;
-
-		button, input {
-			background-color: var(--sd-black-l5);
-			opacity: 50%;
-			padding: 5px 10px;
-			transition: opacity 0.2s ease;
-
-			&:first-child {		
-				border-radius: 5px 0px 0px 5px;
-			}
-
-			&:last-child {
-				border-radius: 0px 5px 5px 0px;
-			}
-
-			&:focus-visible, &:hover {
-				opacity: 100%;
-			}
-		}
-
-		#search {
-			flex: 1;
-		}
-	}
-
-	// Display
-	#display {
-		background-color: var(--sd-black-l5);
-		border-radius: 5px;
-		flex: 1;
-		overflow: hidden;
-		padding: 5px 10px;
-		width: calc(100% - 20px);
+		width: 85%;
 	}
 </style>
