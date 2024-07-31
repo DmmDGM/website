@@ -6,10 +6,13 @@
 <!-- Script -->
 <script lang="ts">
 	// Imports
-    import { TextFile } from "$lib/ts/files";
+    import * as System from "$lib/ts/system";
 
 	// Exports
-	export let content: TextFile;
+	export let system: System._System;
+
+	// Defines content
+	$: content = system.content as System._TextFile;
 </script>
 
 <!-- Style -->

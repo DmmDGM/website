@@ -1,119 +1,27 @@
 // Imports
-import { ExplorerFolder, TextFile } from "./files";
+import * as System from "./system";
 
 // Defines root
-export const root = new ExplorerFolder("dmmdgm", null);
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("???.txt", root, { data: "never gonna give you up\nnever gonna let you down\nnever gonna turn around and hurt you" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
-root.data.add(new TextFile("hello.txt", root, { data: "hello world" }));
+export const root = new System._Root();
+root.data.add(new System._TextFile({
+	data: "hello world",
+	name: "hello",
+	parent: root
+}));
+root.data.add(new System._TextFile({
+	data: "never gonna give you up\nnever gonna let you down\nnever gonna turn around and hurt you",
+	name: "???",
+	parent: root
+}));
 
-// Defines subroot
-export const subroot = new ExplorerFolder("subroot", root);
-root.data.add(subroot);
-subroot.data.add(new TextFile("yoo.txt", subroot, { data: "hai" }));
+// Defines sub
+export const sub = new System._Directory({
+	name: "sub",
+	parent: root
+});
+sub.data.add(new System._TextFile({
+	data: "hai world",
+	name: "hai",
+	parent: sub
+}));
+root.data.add(sub);

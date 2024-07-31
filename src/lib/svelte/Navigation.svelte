@@ -1,32 +1,46 @@
 <!-- Template -->
 <div id="navigation">
 	<!-- Backward -->
-	<button on:click={() => backward()}>
-		<LeftArrowSvg />
+	<button on:click={() => system.back()}>
+		<ArrowLeftSvg />
 	</button>
 
 	<!-- Forward -->
-	<button on:click={() => forward()}>
-		<RightArrowSvg />
+	<button on:click={() => system.forward()}>
+		<ArrowRightSvg />
 	</button>
 
 	<!-- Upward -->
-	<button on:click={() => upward()}>
-		<UpArrowSvg />
+	<button on:click={() => system.upward()}>
+		<ArrowUpSvg />
 	</button>
 
 	<!-- Search query -->
 	<input
-		bind:value={query}
+		bind:value={system.query}
 		on:keydown={(event) => {
-			if(event.key === "Escape") query = content.path();
-			else if(event.key === "Enter") search();
+			// Checks key press
+			switch(event.key) {
+				// Checks for escape
+				case "Escape": {
+					// Resets query to file path
+					system.query = system.content.getFilePath();
+					break;
+				}
+				
+				// Checks for enter key
+				case "Enter": {
+					// Searches query
+					system.search();
+					break;
+				}
+			}
 		}}
 		placeholder="/"
 	>
 
 	<!-- Search -->
-	<button on:click={() => search()}>
+	<button on:click={() => system.search()}>
 		<SearchSvg />
 	</button>
 </div>
@@ -34,21 +48,14 @@
 <!-- Script -->
 <script lang="ts">
 	// Imports
-	import LeftArrowSvg from "$lib/svg/arrow/LeftArrowSvg.svelte";
-	import RightArrowSvg from "$lib/svg/arrow/RightArrowSvg.svelte";
-	import SearchSvg from "$lib/svg/util/SearchSvg.svelte";
-	import UpArrowSvg from "$lib/svg/arrow/UpArrowSvg.svelte";
-    import type { BaseFile, BaseFolder } from "$lib/ts/files";
-    import type { Timeline } from "$lib/ts/timeline";
+    import ArrowLeftSvg from "$lib/svg/ArrowLeftSvg.svelte";
+    import ArrowRightSvg from "$lib/svg/ArrowRightSvg.svelte";
+    import ArrowUpSvg from "$lib/svg/ArrowUpSvg.svelte";
+	import SearchSvg from "$lib/svg/SearchSvg.svelte";
+    import * as System from "$lib/ts/system";
 
 	// Exports
-	export let backward: () => void;
-	export let content: BaseFile | BaseFolder;
-	export let forward: () => void;
-	export let query: string;
-	export let search: () => void;
-	export let timeline: Timeline;
-	export let upward: () => void;
+	export let system: System._System;
 </script>
 
 <!-- Style -->

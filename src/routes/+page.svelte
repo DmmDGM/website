@@ -4,58 +4,24 @@
 	<Title title="DmmD GM" />
 
 	<!-- Navigation -->
-	<Navigation
-		bind:content={content}
-		bind:query={query}
-		bind:timeline={timeline}
-		backward={() => {
-			// Goes backward in history
-			timeline.backward();
-			content = timeline.current();
-			query = content.path();
-		}}
-		forward={() => {
-			// Goes forward in history
-			timeline.forward();
-			content = timeline.current();
-			query = content.path();
-		}}
-		upward={() => {
-			// Jumps to parent
-			if(content.parent !== null) {
-				timeline.write(content.parent);
-				content = timeline.current();
-				query = content.path();
-			}
-		}}
-		search={() => {
-			console.log("searched " + query);
-		}}
-	/>
+	<Navigation bind:system={system} />
 
 	<!-- Display -->
-	<Display
-		bind:content={content}
-		bind:query={query}
-		bind:timeline={timeline}
-	/>
+	<Display bind:system={system} />
 </main>
 
 <!-- Script -->
 <script lang="ts">
 	// Imports
 	import "$lib/css/soda.css";
-	import Title from "$lib/svelte/Title.svelte";
-	import Navigation from "$lib/svelte/Navigation.svelte";
     import Display from "$lib/svelte/Display.svelte";
-    import { BaseFile, BaseFolder } from "$lib/ts/files";
+	import Navigation from "$lib/svelte/Navigation.svelte";
+	import Title from "$lib/svelte/Title.svelte";
 	import { root } from "$lib/ts/root";
-    import { Timeline } from "$lib/ts/timeline";
+    import * as System from "$lib/ts/system";
 	
-	// Initializes data
-	let content: BaseFile | BaseFolder = root;
-	let timeline: Timeline = new Timeline(root);
-	let query: string = root.path();
+	// Initializes system
+	let system = new System._System(root, () => system = system);
 </script>
 
 <!-- Style -->

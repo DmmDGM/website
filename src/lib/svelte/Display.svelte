@@ -1,30 +1,21 @@
 <!-- Template -->
 <div id="display">
-	{#if content instanceof ExplorerFolder}
-		<Explorer
-			bind:content={content}
-			bind:query={query}
-			bind:timeline={timeline}
-		/>
-	{:else if content instanceof TextFile}
-		<Text
-			bind:content={content}
-		/>
+	{#if system.content instanceof System._Directory}
+		<Explorer bind:system={system} />
+	{:else if system.content instanceof System._TextFile}
+		<Text bind:system={system} />
 	{/if}
 </div>
 
 <!-- Script -->
 <script lang="ts">
 	// Imports
-    import { BaseFile, BaseFolder, ExplorerFolder, TextFile } from "$lib/ts/files";
-    import type { Timeline } from "$lib/ts/timeline";
+    import * as System from "$lib/ts/system";
     import Explorer from "./Explorer.svelte";
 	import Text from "./Text.svelte";
 
 	// Exports
-	export let content: BaseFile | BaseFolder;
-	export let query: string;
-	export let timeline: Timeline;
+	export let system: System._System;
 </script>
 
 <!-- Style -->

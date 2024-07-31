@@ -1,30 +1,22 @@
 <!-- Template -->
 <div id="explorer">
 	{#each content.data.values() as file}
-		<button
-			on:click={() => {
-				timeline.write(file);
-				// @ts-ignore
-				content = timeline.current();
-				query = content.path();
-			}}
-			class="file"
-		>
-			{file.name}
+		<button on:click={() => system.open(file)} class="file">
+			{file.getFileName()}
 		</button>
 	{/each}
 </div>
 
 <!-- Script -->
 <script lang="ts">
-	// 
-    import { ExplorerFolder, BaseFile, BaseFolder } from "$lib/ts/files";
-    import type { Timeline } from "$lib/ts/timeline";
+	// Imports
+    import * as System from "$lib/ts/system";
 
 	// Exports
-	export let content: ExplorerFolder;
-	export let query: string;
-	export let timeline: Timeline;
+	export let system: System._System;
+
+	// Defines content
+	$: content = system.content as System._Directory;
 </script>
 
 <!-- Style -->
