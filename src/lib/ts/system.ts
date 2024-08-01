@@ -1,10 +1,12 @@
 // Imports
 import type { ComponentType } from "svelte";
+import TextFileSvg from "$lib/svg/TextFileSvg.svelte";
 
 // Defines history
 export class _History<Type> {
 	// Defines properties
 	index: number = 0;
+	limit: number = 30;
 	timeline: Type[] = [];
 
 	// Defines constructor
@@ -43,7 +45,8 @@ export class _History<Type> {
 		// Overwrites timeline
 		this.timeline.splice(this.index + 1);
 		this.timeline.push(record);
-		this.index += 1;
+		this.timeline = this.timeline.slice(-this.limit);
+		this.index = this.timeline.length - 1;
 	}
 }
 
@@ -134,6 +137,7 @@ export class _TableFile extends _IndexNode {
 export class _TextFile extends _IndexNode {
 	// Defines properties
 	data: string = "";
+	icon: ComponentType | string | null = TextFileSvg;
 	suffix: string = ".txt";
 
 	// Defines constructor
