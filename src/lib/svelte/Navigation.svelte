@@ -1,5 +1,5 @@
 <!-- Template -->
-<div id="navigation">
+<div id="navigation" >
 	<!-- Backward -->
 	<button on:click={() => system.back()}>
 		<ArrowLeftSvg />
@@ -20,18 +20,18 @@
 		bind:value={system.query}
 		on:keydown={(event) => {
 			// Checks key press
-			switch(event.key) {
-				// Checks for escape
-				case "Escape": {
-					// Resets query to file path
-					system.query = system.content.getFilePath();
-					break;
-				}
-				
+			switch(event.key) {				
 				// Checks for enter key
 				case "Enter": {
 					// Searches query
 					system.search();
+					break;
+				}
+				
+				// Checks for escape
+				case "Escape": {
+					// Resets query to file path
+					system.query = system.content.getFullPath();
 					break;
 				}
 			}
@@ -43,11 +43,17 @@
 	<button on:click={() => system.search()}>
 		<SearchSvg />
 	</button>
+	
+	<!-- Refresh -->
+	<button on:click={() => system.refresh()}>
+		<ArrowClockwiseSvg />
+	</button>
 </div>
 
 <!-- Script -->
-<script lang="ts">
+<script lang="ts">	
 	// Imports
+    import ArrowClockwiseSvg from "$lib/svg/ArrowClockwiseSvg.svelte";
     import ArrowLeftSvg from "$lib/svg/ArrowLeftSvg.svelte";
     import ArrowRightSvg from "$lib/svg/ArrowRightSvg.svelte";
     import ArrowUpSvg from "$lib/svg/ArrowUpSvg.svelte";
@@ -67,16 +73,15 @@
 
 		> * {
 			background-color: var(--sd-black-l5);
-			opacity: 50%;
 			padding: 5px 10px;
-			transition: opacity 0.2s ease;
+			transition: background 0.2s ease;
 
 			&:first-child {		
 				border-radius: 5px 0px 0px 5px;
 			}
 
 			&:focus-visible, &:hover {
-				opacity: 100%;
+				background-color: var(--sd-black-l10);
 			}
 
 			&:last-child {

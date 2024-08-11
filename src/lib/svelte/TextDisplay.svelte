@@ -1,6 +1,9 @@
 <!-- Template -->
 <div id="text">
-	<p>{content.data}</p>
+	<!-- Content -->
+	<div id="content">
+		{content.data}
+	</div>
 </div>
 
 <!-- Script -->
@@ -17,7 +20,7 @@
 
 <!-- Style -->
 <style lang="scss">
-	// Explorer
+	// Text
 	#text {
 		display: flex;
 		flex-direction: column;
@@ -29,7 +32,8 @@
 		padding-right: 10px;
 	}
 
-	p {
+	// Content
+	#content {
 		padding: 5px 10px;
 		white-space: pre-wrap;
 	}

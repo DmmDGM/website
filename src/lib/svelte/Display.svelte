@@ -1,9 +1,13 @@
 <!-- Template -->
 <div id="display">
 	{#if system.content instanceof System._Directory}
-		<Explorer bind:system={system} />
+		<ExplorerDisplay bind:system={system} />
+	{:else if system.content instanceof System._AppFile}
+		<AppDisplay bind:system={system} />
+	{:else if system.content instanceof System._TableFile}
+		<TableDisplay bind:system={system} />
 	{:else if system.content instanceof System._TextFile}
-		<Text bind:system={system} />
+		<TextDisplay bind:system={system} />
 	{/if}
 </div>
 
@@ -11,8 +15,10 @@
 <script lang="ts">
 	// Imports
     import * as System from "$lib/ts/system";
-    import Explorer from "./Explorer.svelte";
-	import Text from "./Text.svelte";
+    import AppDisplay from "./AppDisplay.svelte";
+    import ExplorerDisplay from "./ExplorerDisplay.svelte";
+	import TableDisplay from "./TableDisplay.svelte";
+	import TextDisplay from "./TextDisplay.svelte";
 
 	// Exports
 	export let system: System._System;
